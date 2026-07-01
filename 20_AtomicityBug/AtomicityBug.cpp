@@ -48,7 +48,7 @@ public:
     }
 };
 
-void main()
+int main()
 {
     List list;
     std::list<future<void>> futures;

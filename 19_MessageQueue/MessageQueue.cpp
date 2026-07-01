@@ -15,14 +15,14 @@ public:
     void send(T msg)
     {
         lock_guard<mutex> lck(_mtx);
-        _messages.push_front(move(msg));
+        _messages.push_front(std::move(msg));
         _cond.notify_one();
     }
     T receive()
     {
         unique_lock<mutex> lck(_mtx);
         _cond.wait(lck, [this] { return !_messages.empty(); });
-        T msg = move(_messages.back());
+        T msg = std::move(_messages.back());
         _messages.pop_back();
         return msg;
     }
@@ -33,7 +33,7 @@ private:
     deque<T> _messages;
 };
 
-void main()
+int main()
 {
     MessageQueue<int> queue;
     future<void> fut = async([&queue] { queue.send(44); });

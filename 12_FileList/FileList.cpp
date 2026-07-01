@@ -6,7 +6,7 @@
 #include <vector>
 
 // filesystem
-using namespace std::tr2::sys;
+using namespace std::filesystem;
 using namespace std;
 
 vector<string> listDir(path const& dir)
@@ -16,7 +16,7 @@ vector<string> listDir(path const& dir)
     {
         if (is_regular_file(it->status()))
         {
-            files.push_back(it->path().leaf());
+            files.push_back(it->path().filename().string());
         }
     }
     return files;
@@ -39,7 +39,7 @@ vector<string> listDirs(vector<path> const& paths)
     return allFiles;
 }
 
-void main()
+int main()
 {
     vector<path> paths;
     for (directory_iterator it("c:\\"); it != directory_iterator(); ++it)

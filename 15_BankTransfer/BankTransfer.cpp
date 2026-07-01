@@ -3,6 +3,7 @@
 #include <iostream>
 #include <mutex>
 #include <thread>
+#include <vector>
 
 using namespace std;
 
@@ -49,14 +50,14 @@ public:
     {
         if (_accts[0].balance() < 0 || _accts[1].balance() < 0)
         {
-            throw exception("Negative balance!");
+            throw runtime_error("Negative balance!");
         }
     }
     void assertSolvent() const
     {
         if (_accts[0].balance() + _accts[1].balance() < _minBalance)
         {
-            throw exception("Need bailout!");
+            throw runtime_error("Need bailout!");
         }
     }
 };
@@ -88,7 +89,7 @@ void test()
     }
 }
 
-void main()
+int main()
 {
     try
     {

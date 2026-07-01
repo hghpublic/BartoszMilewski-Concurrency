@@ -1,3 +1,4 @@
+#include <functional>
 #include <future>
 #include <iostream>
 #include <thread>
@@ -14,7 +15,7 @@ struct Holder
     Counter* c;
 };
 
-void main()
+int main()
 {
     const Holder h(10);
     std::future<void> fut =

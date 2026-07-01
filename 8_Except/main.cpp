@@ -1,5 +1,6 @@
 #include <future>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <thread>
 
@@ -8,7 +9,7 @@ void fun(std::promise<std::string>&& pr)
     try
     {
         std::cout << "Worker throwing.\n";
-        throw std::exception("Exception from thread.");
+        throw std::runtime_error("Exception from thread.");
     }
     catch (...)
     {
@@ -16,7 +17,7 @@ void fun(std::promise<std::string>&& pr)
     }
 }
 
-void main()
+int main()
 {
     std::promise<std::string> pr;
     std::future<std::string> fut = pr.get_future();

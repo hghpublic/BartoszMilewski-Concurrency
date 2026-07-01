@@ -2,7 +2,7 @@
 #include <thread>
 #include <vector>
 
-void main()
+int main()
 {
     std::vector<std::thread> threads;
     for (int i = 0; i < 16; ++i)

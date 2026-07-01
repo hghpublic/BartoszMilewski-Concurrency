@@ -2,6 +2,7 @@
 #include <iostream>
 #include <mutex>
 #include <thread>
+#include <vector>
 
 using namespace std;
 
@@ -52,7 +53,7 @@ void test()
     cout << "Final balance " << acct.balance() << endl;
 }
 
-void main()
+int main()
 {
     test();
 }

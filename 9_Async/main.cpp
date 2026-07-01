@@ -1,5 +1,6 @@
 #include <future>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <thread>
 
@@ -13,11 +14,11 @@ std::string fun(bool flag)
     else
     {
         std::cout << "Worker throwing.\n";
-        throw std::exception("Exception from thread.");
+        throw std::runtime_error("Exception from thread.");
     }
 }
 
-void main()
+int main()
 {
     std::future<std::string> fut = std::async(fun, true);
     std::cout << "Main receiving.\n";

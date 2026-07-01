@@ -8,7 +8,7 @@
 #include <vector>
 
 // filesystem
-using namespace std::tr2::sys;
+using namespace std::filesystem;
 using namespace std;
 
 class FileMonitor
@@ -17,7 +17,7 @@ public:
     void push_back(string file)
     {
         lock_guard<mutex> lck(_mtx);
-        _allFiles.push_back(move(file));
+        _allFiles.push_back(std::move(file));
         _cond.notify_one();
     }
     string pop_back()
@@ -28,7 +28,7 @@ public:
             _cond.wait(lck);
         */
         _cond.wait(lck, [this] { return !_allFiles.empty(); });
-        string name = move(_allFiles.back());
+        string name = std::move(_allFiles.back());
         _allFiles.pop_back();
         return name;
     }
@@ -45,7 +45,7 @@ void listDir(string path, FileMonitor& fileSink)
     {
         if (is_regular_file(it->status()))
         {
-            fileSink.push_back(it->path().leaf());
+            fileSink.push_back(it->path().filename().string());
         }
     }
 }
@@ -56,7 +56,7 @@ void listDirs(vector<path> paths, FileMonitor& fileSink)
     for (auto& pth : paths)
     {
         cout << pth << endl;
-        futures.emplace_back(async(listDir, pth, ref(fileSink)));
+        futures.emplace_back(async(listDir, pth.string(), ref(fileSink)));
     }
     for (;;)
     {
@@ -69,7 +69,7 @@ void listDirs(vector<path> paths, FileMonitor& fileSink)
     }
 }
 
-void main()
+int main()
 {
     vector<path> paths;
     for (directory_iterator it("c:\\"); it != directory_iterator(); ++it)
