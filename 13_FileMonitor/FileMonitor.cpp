@@ -60,7 +60,8 @@ void listDirs(vector<path> paths, FileMonitor& fileSink)
 int main()
 {
     vector<path> paths;
-    for (directory_iterator it("c:\\"); it != directory_iterator(); ++it)
+    const auto root{current_path().root_path()};
+    for (directory_iterator it(root); it != directory_iterator(); ++it)
     {
         if (is_directory(it->status()))
         {

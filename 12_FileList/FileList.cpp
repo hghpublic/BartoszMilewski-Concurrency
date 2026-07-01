@@ -12,11 +12,12 @@ using namespace std;
 vector<string> listDir(path const& dir)
 {
     vector<string> files;
-    for (directory_iterator it(dir); it != directory_iterator(); ++it)
+    for (const auto& entry :
+         directory_iterator(dir, directory_options::skip_permission_denied))
     {
-        if (is_regular_file(it->status()))
+        if (is_regular_file(entry.status()))
         {
-            files.push_back(it->path().filename().string());
+            files.push_back(entry.path().filename().string());
         }
     }
     return files;
@@ -42,11 +43,13 @@ vector<string> listDirs(vector<path> const& paths)
 int main()
 {
     vector<path> paths;
-    for (directory_iterator it("c:\\"); it != directory_iterator(); ++it)
+    const auto root{current_path().root_path()};
+    for (const auto& entry :
+         directory_iterator(root, directory_options::skip_permission_denied))
     {
-        if (is_directory(it->status()))
+        if (is_directory(entry.status()))
         {
-            paths.push_back(it->path());
+            paths.push_back(entry.path());
         }
     }
 
