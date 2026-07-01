@@ -1,0 +1,38 @@
+cmake_minimum_required(VERSION 4.3)
+
+project(Concurrency)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(CMAKE_CXX_STANDARD 20)
+else()
+    set(CMAKE_CXX_STANDARD 26)
+endif()
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_subdirectory(1_Thread)
+add_subdirectory(2_Lambda)
+add_subdirectory(3_Barrier)
+add_subdirectory(4_Bug)
+add_subdirectory(5_FunctionObject)
+add_subdirectory(6_PassArgs)
+add_subdirectory(7_Future)
+add_subdirectory(8_Except)
+add_subdirectory(9_Async)
+add_subdirectory(10_BadPass)
+add_subdirectory(10_Launch)
+add_subdirectory(11_BadConst)
+add_subdirectory(12_FileList)
+add_subdirectory(13_FileMonitor)
+add_subdirectory(14_BankAccount)
+add_subdirectory(15_BankTransfer)
+add_subdirectory(16_BankDeadlock)
+add_subdirectory(17_FilePolling)
+add_subdirectory(18_Condition)
+add_subdirectory(19_MessageQueue)
+add_subdirectory(20_AtomicityBug)
+
+# Search
+# note: select the x86 kit
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+add_subdirectory(Search)
+endif()
