@@ -1,0 +1,63 @@
+= Concurrency
+:toc:
+:sectnums:
+ifndef::env-github[:icons: font]
+:note-caption: :paperclip:
+:important-caption: :exclamation:
+:warning-caption: :warning:
+
+[IMPORTANT]
+====
+The commit history of this branch is volatile. +
+Rebasing and force pushing happens at will. +
+The commits in this branch mostly collect changes with a narrow scope. +
+They rarely document code evolution. +
+The history may be rewritten without notice.
+====
+
+
+== Bartosz Milewski
+
+Bartosz Milewski's Programming Cafe::
+https://bartoszmilewski.com/
+
+YouTube::
+https://www.youtube.com/@DrBartosz
++
+C++11 Concurrency
++
+https://www.youtube.com/playlist?list=PL1835A90FC78FF8BE
+
+GitHub::
+https://github.com/bartoszmilewski
+
+== Introduction to C++ Concurrency LiveLessons (Video Training)
+
+_Introduction to C++ Concurrency LiveLessons_ introduces the principles of concurrency by creating and running simple programs. It not only shows how to write correct code, but also discusses the dangers and pitfalls of concurrency such as data races, deadlocks, livelocks, and more.
+
+O'Reilly::
+https://learning.oreilly.com/course/introduction-to-c/9780134031507/
+
+Informit::
+https://www.informit.com/store/introduction-to-c-plus-plus-concurrency-livelessons-9780134031484
+
+GitHub::
+https://github.com/BartoszMilewski/Concurrency
+
+
+== Stash
+
+C++ Concurrency in Action, Second Edition
+
+. https://learning.oreilly.com/library/view/c-concurrency-in/9781617294693/
+. https://learning.oreilly.com/videos/c-concurrency-in/9781617294693VE/
+. https://learning.oreilly.com/videos/c-concurrency-in/9781617294693AU/
+
+Functional Programming in C++
+
+. https://learning.oreilly.com/library/view/functional-programming-in/9781617293818/
+. https://learning.oreilly.com/videos/functional-programming-in/9781617293818VE/
+. https://learning.oreilly.com/videos/functional-programming-in/9781617293818AU/
+
+
+
