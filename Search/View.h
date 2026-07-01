@@ -1,7 +1,7 @@
-#if !defined (VIEW_H)
+#if !defined(VIEW_H)
 #define VIEW_H
-#include "Win/ListBox.h"
 #include "Win/Edit.h"
+#include "Win/ListBox.h"
 #include "Win/Win.h"
 class Calculator;
 
@@ -17,23 +17,18 @@ class View
 public:
     View(Win::Dow winTop);
     void Size(int width, int height);
-    std::wstring GetInput()
-    {
-        return _edit.GetText();
-    }
-    void SetFocus()
-    {
-        _edit.SetFocus();
-    }
+    std::wstring GetInput() { return _edit.GetText(); }
+    void SetFocus() { _edit.SetFocus(); }
     void Clear();
-    void AddItem(std::wstring const & str);
+    void AddItem(std::wstring const& str);
+
 private:
     int _charWidth;
     int _charHeight;
 
-    Win::ListBox	_list;
-    Win::Edit		_edit;
+    Win::ListBox _list;
+    Win::Edit _edit;
 
-    EditController	_editCtrl;
+    EditController _editCtrl;
 };
 #endif

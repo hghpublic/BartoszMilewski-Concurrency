@@ -1,10 +1,10 @@
-#include <thread>
-#include <future>
 #include <filesystem>
-#include <vector>
-#include <string>
+#include <future>
 #include <iostream>
 #include <mutex>
+#include <string>
+#include <thread>
+#include <vector>
 
 // filesystem
 using namespace std::tr2::sys;
@@ -21,15 +21,18 @@ public:
     void print()
     {
         lock_guard<mutex> lck(_mtx);
-        for (auto & name : _allFiles)
+        for (auto& name : _allFiles)
+        {
             cout << name << endl;
+        }
     }
+
 private:
     mutex _mtx;
     vector<string> _allFiles;
 };
 
-void listDir(string path, FileMonitor & fileSink)
+void listDir(string path, FileMonitor& fileSink)
 {
     for (directory_iterator it(path); it != directory_iterator(); ++it)
     {
@@ -40,15 +43,15 @@ void listDir(string path, FileMonitor & fileSink)
     }
 }
 
-void listDirs(vector<path> paths, FileMonitor & fileSink)
+void listDirs(vector<path> paths, FileMonitor& fileSink)
 {
     vector<future<void>> futures;
-    for (auto & pth : paths)
+    for (auto& pth : paths)
     {
         cout << pth << endl;
         futures.emplace_back(async(listDir, pth, ref(fileSink)));
     }
-    for (auto &fut : futures)
+    for (auto& fut : futures)
     {
         fut.wait();
     }
@@ -60,11 +63,12 @@ void main()
     for (directory_iterator it("c:\\"); it != directory_iterator(); ++it)
     {
         if (is_directory(it->status()))
+        {
             paths.push_back(it->path());
+        }
     }
 
     FileMonitor fileSink;
     listDirs(paths, fileSink);
     fileSink.print();
 }
-

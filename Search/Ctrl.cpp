@@ -1,8 +1,6 @@
 #include "Ctrl.h"
 
-TopController::TopController()
-    :_msgNotify(L"Notify")
-{}
+TopController::TopController() : _msgNotify(L"Notify") {}
 
 bool TopController::OnDestroy()
 {
@@ -10,10 +8,11 @@ bool TopController::OnDestroy()
     return true;
 }
 
-bool TopController::OnCreate(Win::CreateData const * create)
+bool TopController::OnCreate(Win::CreateData const* create)
 {
     _view = std::unique_ptr<View>(new View(_win));
-    _model = std::unique_ptr<Model>(new Model(_win, _msgNotify, L"c:\\Dropbox\\Video\\Search"));
+    _model = std::unique_ptr<Model>(
+        new Model(_win, _msgNotify, L"c:\\Dropbox\\Video\\Search"));
     return true;
 }
 
@@ -32,7 +31,7 @@ bool TopController::OnSize(int width, int height, int flags)
     return true;
 }
 
-bool TopController::OnRegisteredMessage(Win::Message & msg)
+bool TopController::OnRegisteredMessage(Win::Message& msg)
 {
     if (msg == _msgNotify)
     {
@@ -40,7 +39,9 @@ bool TopController::OnRegisteredMessage(Win::Message & msg)
         {
             std::wstring file = _model->GetFileSnc();
             if (file.empty())
+            {
                 break;
+            }
             _view->AddItem(file);
         }
         return true;
@@ -79,11 +80,12 @@ bool TopController::OnControl(Win::Dow control, int controlId, int notifyCode)
         Cursor::Holder hourglass(_waitCursor);
         _model->SearchFiles(str);
         for (auto str : _model->GetFiles())
+        {
             _view->AddItem(str);
+        }
         return true;
     }
     return false;
 }
 
 #endif
-

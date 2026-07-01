@@ -1,27 +1,23 @@
-#if !defined (ICON_H)
+#if !defined(ICON_H)
 #define ICON_H
 #include <Windows.h>
 
 class Icon
 {
 public:
-    Icon(HINSTANCE res,
-        int id,
-        int dx = 0,
-        int dy = 0,
-        unsigned flag = LR_DEFAULTCOLOR)
+    Icon(HINSTANCE res, int id, int dx = 0, int dy = 0,
+         unsigned flag = LR_DEFAULTCOLOR)
     {
         Load(res, id, dx, dy, flag);
     }
     ~Icon();
-    operator HICON () const { return _win; }
+    operator HICON() const { return _win; }
+
 protected:
     Icon() : _win(0) {}
-    void Load(HINSTANCE res,
-        int id,
-        int dx = 0,
-        int dy = 0,
-        unsigned flag = LR_DEFAULTCOLOR);
+    void Load(HINSTANCE res, int id, int dx = 0, int dy = 0,
+              unsigned flag = LR_DEFAULTCOLOR);
+
 protected:
     HICON _win;
 };

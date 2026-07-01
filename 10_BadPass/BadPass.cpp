@@ -1,9 +1,8 @@
-#include <thread>
 #include <future>
 #include <memory>
+#include <thread>
 
-void threadFun(std::unique_ptr<int> p)
-{}
+void threadFun(std::unique_ptr<int> p) {}
 
 void main()
 {

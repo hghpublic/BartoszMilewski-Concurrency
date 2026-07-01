@@ -1,7 +1,7 @@
-#include <thread>
 #include <future>
-#include <mutex>
 #include <iostream>
+#include <mutex>
+#include <thread>
 
 using namespace std;
 
@@ -9,9 +9,10 @@ class Account
 {
     mutable mutex _mutex;
     int _balance;
+
 public:
     Account(int balance = 0) : _balance(balance) {}
-    Account(Account &) = delete;
+    Account(Account&) = delete;
     void deposit(int sum)
     {
         lock_guard<mutex> lck(_mutex);
@@ -24,20 +25,14 @@ public:
     }
 };
 
-future<void> depositor(Account & acct, int sum)
+future<void> depositor(Account& acct, int sum)
 {
-    return async([&](int sum)
-    {
-        acct.deposit(sum);
-    }, sum);
+    return async([&](int sum) { acct.deposit(sum); }, sum);
 }
 
-future<void> balancer(Account const & acct)
+future<void> balancer(Account const& acct)
 {
-    return async([&]()
-    {
-        cout << acct.balance() << endl;
-    });
+    return async([&]() { cout << acct.balance() << endl; });
 }
 
 void test()
@@ -50,8 +45,10 @@ void test()
     futures.emplace_back(balancer(acct));
     futures.emplace_back(depositor(acct, -10));
     futures.emplace_back(depositor(acct, -10));
-    for (auto & fut : futures)
+    for (auto& fut : futures)
+    {
         fut.wait();
+    }
     cout << "Final balance " << acct.balance() << endl;
 }
 

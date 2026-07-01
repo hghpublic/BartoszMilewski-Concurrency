@@ -1,14 +1,14 @@
-#include <thread>
-#include <future>
-#include <deque>
-#include <mutex>
 #include <condition_variable>
+#include <deque>
+#include <future>
+#include <mutex>
+#include <thread>
 
 #include <iostream>
 
 using namespace std;
 
-template<class T>
+template <class T>
 class MessageQueue
 {
 public:
@@ -26,6 +26,7 @@ public:
         _messages.pop_back();
         return msg;
     }
+
 private:
     mutable mutex _mtx;
     mutable condition_variable _cond;

@@ -1,19 +1,18 @@
-#include <thread>
 #include <iostream>
+#include <thread>
 #include <vector>
 
-#include <thread>
-#include <iostream>
-#include <vector>
 #include <chrono>
+#include <iostream>
+#include <thread>
+#include <vector>
 
 std::vector<std::thread> spawn()
 {
     std::vector<std::thread> threads;
     for (int i = 0; i < 16; ++i)
     {
-        threads.emplace_back([&]()
-        {
+        threads.emplace_back([&]() {
             std::this_thread::sleep_for(std::chrono::milliseconds(10 * i));
             std::cout << "Hello from thread " << i << "!\n";
         });
@@ -27,8 +26,7 @@ void main()
 #if 1
     for (int i = 0; i < 16; ++i)
     {
-        threads.emplace_back([&]()
-        {
+        threads.emplace_back([&]() {
             std::this_thread::sleep_for(std::chrono::milliseconds(10 * i));
             std::cout << "Hello from thread " << i << "!\n";
         });
@@ -37,6 +35,8 @@ void main()
     threads = spawn();
 #endif
     std::cout << "Hello from main!\n";
-    for (auto & t : threads)
+    for (auto& t : threads)
+    {
         t.join();
- }
+    }
+}

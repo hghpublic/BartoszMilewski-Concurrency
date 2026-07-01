@@ -1,15 +1,15 @@
-#include <thread>
-#include <future>
 #include <filesystem>
-#include <vector>
-#include <string>
+#include <future>
 #include <iostream>
+#include <string>
+#include <thread>
+#include <vector>
 
 // filesystem
 using namespace std::tr2::sys;
 using namespace std;
 
-vector<string> listDir(path const & dir)
+vector<string> listDir(path const& dir)
 {
     vector<string> files;
     for (directory_iterator it(dir); it != directory_iterator(); ++it)
@@ -22,16 +22,16 @@ vector<string> listDir(path const & dir)
     return files;
 }
 
-vector<string> listDirs(vector<path> const & paths)
+vector<string> listDirs(vector<path> const& paths)
 {
     vector<future<vector<string>>> futures;
-    for (auto const & pth: paths)
+    for (auto const& pth : paths)
     {
         cout << pth << endl;
         futures.emplace_back(async(listDir, ref(pth)));
     }
     vector<string> allFiles;
-    for (auto & fut : futures)
+    for (auto& fut : futures)
     {
         auto files = fut.get();
         move(files.begin(), files.end(), back_inserter(allFiles));
@@ -45,10 +45,13 @@ void main()
     for (directory_iterator it("c:\\"); it != directory_iterator(); ++it)
     {
         if (is_directory(it->status()))
+        {
             paths.push_back(it->path());
+        }
     }
 
     for (auto name : listDirs(paths))
+    {
         cout << name << endl;
+    }
 }
-

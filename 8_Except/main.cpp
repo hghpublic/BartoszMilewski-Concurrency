@@ -1,9 +1,9 @@
-#include <thread>
 #include <future>
 #include <iostream>
 #include <string>
+#include <thread>
 
-void fun(std::promise<std::string> && pr)
+void fun(std::promise<std::string>&& pr)
 {
     try
     {

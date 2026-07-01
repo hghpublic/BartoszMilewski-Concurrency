@@ -1,5 +1,5 @@
-#include <thread>
 #include <iostream>
+#include <thread>
 
 void threadFun()
 {

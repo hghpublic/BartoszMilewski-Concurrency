@@ -28,7 +28,7 @@ void View::Size(int width, int height)
     _list.Move(0, hEdit, wEdit, height - hEdit);
 }
 
-void View::AddItem(std::wstring const & str)
+void View::AddItem(std::wstring const& str)
 {
     _list.AddString(str);
 }
@@ -44,9 +44,8 @@ bool EditController::OnKeyDown(int vKey, int flags)
 {
     if (vKey == VK_RETURN)
     {
-        _win.GetParent().SendMessage(WM_COMMAND,
-            MAKEWPARAM(IDOK, 0),
-            reinterpret_cast<LPARAM> (_win.handle()));
+        _win.GetParent().SendMessage(WM_COMMAND, MAKEWPARAM(IDOK, 0),
+                                     reinterpret_cast<LPARAM>(_win.handle()));
         return true;
     }
     return false;
@@ -56,7 +55,8 @@ bool EditController::OnKeyDown(int vKey, int flags)
 bool EditController::OnChar(int vKey, int flags)
 {
     if (vKey == VK_RETURN)
+    {
         return true;
+    }
     return false;
 };
-

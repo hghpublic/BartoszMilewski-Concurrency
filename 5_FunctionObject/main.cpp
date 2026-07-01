@@ -1,16 +1,13 @@
-#include <thread>
 #include <iostream>
+#include <thread>
 #include <vector>
 
 class FunObj
 {
 public:
-    FunObj(int i) : _i(i)
-    {}
-    void operator()()
-    {
-        std::cout << "Hello from thread " << _i << "!\n";
-    }
+    FunObj(int i) : _i(i) {}
+    void operator()() { std::cout << "Hello from thread " << _i << "!\n"; }
+
 private:
     int _i;
 };
@@ -23,6 +20,8 @@ void main()
         threads.emplace_back(FunObj(i));
     }
     std::cout << "Hello from main!\n";
-    for (auto & t: threads)
+    for (auto& t : threads)
+    {
         t.join();
+    }
 }

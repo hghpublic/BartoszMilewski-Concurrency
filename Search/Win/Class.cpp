@@ -1,13 +1,13 @@
 #include "Class.h"
 #include "Procedure.h"
 
-Win::ClassMaker::ClassMaker
-(WNDPROC winProcedure, std::wstring const & className, HINSTANCE hInst)
+Win::ClassMaker::ClassMaker(WNDPROC winProcedure, std::wstring const& className,
+                            HINSTANCE hInst)
 {
-    _class.lpfnWndProc = winProcedure;// window procedure: mandatory
-    _class.hInstance = hInst;         // owner of the class: mandatory
+    _class.lpfnWndProc = winProcedure;        // window procedure: mandatory
+    _class.hInstance = hInst;                 // owner of the class: mandatory
     _class.lpszClassName = className.c_str(); // mandatory
-    _class.cbSize = sizeof (WNDCLASSEX);
+    _class.cbSize = sizeof(WNDCLASSEX);
     _class.hCursor = ::LoadCursor(0, IDC_ARROW);
     _class.hbrBackground = 0;
     _class.style = 0;

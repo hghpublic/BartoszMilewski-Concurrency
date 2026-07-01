@@ -3,7 +3,7 @@
 #include <string>
 
 // Thread function
-void worker(std::wstring root, std::wstring str, FileSink * sink)
+void worker(std::wstring root, std::wstring str, FileSink* sink)
 {
 #if PAR_IMPL == 1
     SearchFilesRecPar(root, str, *sink);
@@ -12,8 +12,9 @@ void worker(std::wstring root, std::wstring str, FileSink * sink)
 #endif
 }
 
-Model::Model(Win::Dow winTop, Win::Message const & msgNotify, std::wstring const & root)
-: _win(winTop), _root(root), _msgNotify(msgNotify)
+Model::Model(Win::Dow winTop, Win::Message const& msgNotify,
+             std::wstring const& root)
+    : _win(winTop), _root(root), _msgNotify(msgNotify)
 {
 #if ASYNC_IMPL == 1
     _sink.reset(new FileSinkAsync(this));
@@ -25,28 +26,34 @@ Model::Model(Win::Dow winTop, Win::Message const & msgNotify, std::wstring const
 Model::~Model()
 {
     if (_worker.joinable())
+    {
         _worker.join();
+    }
 }
 
-void Model::SearchFiles(std::wstring const & str)
+void Model::SearchFiles(std::wstring const& str)
 {
     SearchFilesRec(_root, str, *_sink);
 }
 
-void Model::SearchFilesAsync(std::wstring const & str)
+void Model::SearchFilesAsync(std::wstring const& str)
 {
     if (_worker.joinable())
+    {
         _worker.join();
+    }
     _worker = std::thread(worker, _root, str, _sink.get());
 }
 
-void Model::AddFile(std::wstring const & name, int n)
+void Model::AddFile(std::wstring const& name, int n)
 {
     if (n > 0)
+    {
         _files.push_back(name);
+    }
 }
 
-void Model::AddFileAsync(std::wstring const & name, int n)
+void Model::AddFileAsync(std::wstring const& name, int n)
 {
     if (n > 0)
     {
@@ -60,7 +67,9 @@ std::wstring Model::GetFileSnc()
 {
     std::lock_guard<std::mutex> lck(_mutex);
     if (_files.empty())
+    {
         return std::wstring();
+    }
 
     std::wstring str = std::move(_files.front());
     _files.pop_back();
@@ -69,7 +78,7 @@ std::wstring Model::GetFileSnc()
 
 // Free functions
 
-int findInFile(wpath const & path, std::wstring const & str)
+int findInFile(wpath const& path, std::wstring const& str)
 {
     std::wifstream in(path);
     int n = 0;
@@ -78,12 +87,14 @@ int findInFile(wpath const & path, std::wstring const & str)
         std::wstring word;
         in >> word;
         if (word == str)
+        {
             ++n;
+        }
     }
     return n;
 }
 
-void SearchFilesRec(wpath const & path, std::wstring const & str, FileSink & sink)
+void SearchFilesRec(wpath const& path, std::wstring const& str, FileSink& sink)
 {
     for (wdirectory_iterator it(path); it != wdirectory_iterator(); ++it)
     {
@@ -100,7 +111,8 @@ void SearchFilesRec(wpath const & path, std::wstring const & str, FileSink & sin
     }
 }
 
-void SearchFilesRecPar(wpath const & path, std::wstring const & str, FileSink & sink)
+void SearchFilesRecPar(wpath const& path, std::wstring const& str,
+                       FileSink& sink)
 {
     std::vector<std::thread> threads;
     for (wdirectory_iterator it(path); it != wdirectory_iterator(); ++it)
@@ -116,8 +128,8 @@ void SearchFilesRecPar(wpath const & path, std::wstring const & str, FileSink & 
             threads.emplace_back(worker, it->path(), str, &sink);
         }
     }
-    for (std::thread & th : threads)
+    for (std::thread& th : threads)
+    {
         th.join();
+    }
 }
-
-

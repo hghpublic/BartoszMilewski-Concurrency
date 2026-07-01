@@ -1,8 +1,8 @@
-#include <thread>
 #include <iostream>
 #include <string>
+#include <thread>
 
-void repeat(std::string & str, int n)
+void repeat(std::string& str, int n)
 {
     if (n > 0)
     {

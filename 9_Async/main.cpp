@@ -1,7 +1,7 @@
-#include <thread>
 #include <future>
 #include <iostream>
 #include <string>
+#include <thread>
 
 std::string fun(bool flag)
 {

@@ -1,8 +1,8 @@
-#include <thread>
-#include <future>
-#include <mutex>
-#include <iostream>
 #include <chrono>
+#include <future>
+#include <iostream>
+#include <mutex>
+#include <thread>
 
 using namespace std;
 
@@ -10,9 +10,10 @@ class Account
 {
     mutable recursive_mutex _mutex;
     int _balance;
+
 public:
     Account(int balance = 0) : _balance(balance) {}
-    Account(Account &) = delete;
+    Account(Account&) = delete;
     void deposit(int sum)
     {
         lock_guard<recursive_mutex> lck(_mutex);
@@ -23,19 +24,16 @@ public:
         lock_guard<recursive_mutex> lck(_mutex);
         return _balance;
     }
-    recursive_mutex & getMutex()
-    {
-        return _mutex;
-    }
+    recursive_mutex& getMutex() { return _mutex; }
 };
 
 class Bank
 {
     Account _accts[2];
     int _minBalance;
+
 public:
-    Bank(int minBalance)
-        :_minBalance(minBalance)
+    Bank(int minBalance) : _minBalance(minBalance)
     {
         _accts[0].deposit(minBalance);
     }
@@ -66,23 +64,29 @@ public:
     void assertPositive() const
     {
         if (_accts[0].balance() < 0 || _accts[1].balance() < 0)
+        {
             throw exception("Negative balance!");
+        }
     }
     void assertSolvent() const
     {
         if (_accts[0].balance() + _accts[1].balance() < _minBalance)
+        {
             throw exception("Need bailout!");
+        }
     }
 };
 
-future<void> trans(Bank & bank, int from, int to, int sum)
+future<void> trans(Bank& bank, int from, int to, int sum)
 {
-    return async(launch::async, [&](int from, int to, int sum)
-    {
-        bank.assertPositive();
-        bank.transfer(from, to, sum);
-        bank.assertSolvent();
-    }, from, to, sum);
+    return async(
+        launch::async,
+        [&](int from, int to, int sum) {
+            bank.assertPositive();
+            bank.transfer(from, to, sum);
+            bank.assertSolvent();
+        },
+        from, to, sum);
 }
 
 void test()
@@ -94,8 +98,10 @@ void test()
         futures.emplace_back(trans(bank, 0, 1, 10));
         futures.emplace_back(trans(bank, 1, 0, 10));
     }
-    for (auto & fut : futures)
+    for (auto& fut : futures)
+    {
         fut.get();
+    }
 }
 
 void main()

@@ -14,11 +14,11 @@ std::wstring Win::Edit::GetText() const
     return val;
 }
 
-void Win::Edit::Append(std::wstring const & buf)
+void Win::Edit::Append(std::wstring const& buf)
 {
     int len = GetLen();
     Select(len, -1);
-    SendMessage(EM_REPLACESEL, 0, reinterpret_cast<LPARAM> (&buf[0]));
+    SendMessage(EM_REPLACESEL, 0, reinterpret_cast<LPARAM>(&buf[0]));
 }
 
 void Win::Edit::SelectLine(int lineNo)
