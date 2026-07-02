@@ -1,0 +1,73 @@
+= wine
+
+
+== winegcc
+
+https://manpages.ubuntu.com/manpages/jammy/man1/winegcc-stable.1.html
+
+https://gitlab.winehq.org/wine/wine/-/wikis/Man-Pages/winegcc
+
+----
+winegcc -v
+/usr/bin/gcc -v
+Using built-in specs.
+COLLECT_GCC=/usr/bin/gcc
+...
+----
+
+----
+winegcc main.cpp
+----
+
+----
+it looks like wine32 is missing, you should install it.
+as root, please execute "apt-get install wine32:i386"
+wine: created the configuration directory '/home/vscode/.wine'
+----
+
+----
+winegcc -o hello hello.c
+wine hello.exe
+
+
+----
+
+== How to Fix the "wine32 is missing" Error on Ubuntu
+
+https://www.techloy.com/how-to-fix-the-wine32-is-missing-error-on-ubuntu/
+
+----
+sudo dpkg --add-architecture i386
+sudo apt install wine32:i386
+sudo apt install --install-recommends wine
+
+wine --version
+
+sudo apt --fix-broken install
+----
+
+----
+winecfg
+it looks like wine32 is missing, you should install it.
+as root, please execute "apt-get install wine32:i386"
+----
+
+----
+dpkg --print-architecture 
+arm64
+
+dpkg --print-foreign-architectures
+----
+
+----
+sudo dpkg --add-architecture i386
+dpkg --print-foreign-architectures
+i386
+----
+
+
+https://www.reddit.com/r/winehq/comments/1eijg8j/impossible_to_use_wine64_without_wine32/
+
+== ARM64
+
+https://gitlab.winehq.org/wine/wine/-/wikis/ARM64

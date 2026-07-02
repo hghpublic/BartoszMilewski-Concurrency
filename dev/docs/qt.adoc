@@ -1,0 +1,17 @@
+= Qt
+
+
+== vcpkg
+
+https://doc.qt.io/qtcreator/creator-vcpkg.html
+
+== Stash
+
+On Qt Creator project based on CMAKE, how to point to VCPKG?
+
+https://stackoverflow.com/questions/73947030/on-qt-creator-project-based-on-cmake-how-to-point-to-vcpkg
+
+Using CMake and vcpkg in Qt application development
+
+https://www.youtube.com/watch?v=s4hHWopX8yw
+

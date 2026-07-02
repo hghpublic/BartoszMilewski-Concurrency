@@ -1,0 +1,26 @@
+= Search
+:toc:
+:sectnums:
+
+== Wine
+
+https://www.winehq.org/
+
+https://gitlab.winehq.org/wine/wine/-/wikis/home
+
+https://gitlab.winehq.org/wine/wine/-/wikis/Winelib-User's-Guide
+
+=== MacOS
+
+https://gitlab.winehq.org/wine/wine/-/wikis/MacOS
+
+----
+brew install --cask --no-quarantine (selected wine package)
+brew install --cask --no-quarantine wine-stable
+----
+
+== Ubuntu
+
+----
+sudo apt install libwine-dev
+----
