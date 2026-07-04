@@ -1,0 +1,5 @@
+# MSVS
+.vs/
+Debug/
+Release/
+*.user

@@ -9,7 +9,8 @@
 #define ASYNC_IMPL 1
 #define PAR_IMPL 1
 
-using namespace std::tr2::sys;
+using namespace std::filesystem;
+using wpath = std::filesystem::path;
 
 class Model;
 

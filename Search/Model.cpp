@@ -96,11 +96,12 @@ int findInFile(wpath const& path, std::wstring const& str)
 
 void SearchFilesRec(wpath const& path, std::wstring const& str, FileSink& sink)
 {
+    using wdirectory_iterator = directory_iterator;
     for (wdirectory_iterator it(path); it != wdirectory_iterator(); ++it)
     {
         if (is_regular_file(it->status()))
         {
-            std::wstring name = it->path().leaf();
+            std::wstring name = it->path().filename();
             int n = findInFile(it->path(), str);
             sink.AddFile(name, n);
         }
@@ -115,11 +116,12 @@ void SearchFilesRecPar(wpath const& path, std::wstring const& str,
                        FileSink& sink)
 {
     std::vector<std::thread> threads;
+    using wdirectory_iterator = directory_iterator;
     for (wdirectory_iterator it(path); it != wdirectory_iterator(); ++it)
     {
         if (is_regular_file(it->status()))
         {
-            std::wstring name = it->path().leaf();
+            std::wstring name = it->path().filename();
             int n = findInFile(it->path(), str);
             sink.AddFile(name, n);
         }
