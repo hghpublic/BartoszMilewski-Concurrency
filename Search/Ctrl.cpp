@@ -12,7 +12,8 @@ bool TopController::OnCreate(Win::CreateData const* create)
 {
     _view = std::unique_ptr<View>(new View(_win));
     _model = std::unique_ptr<Model>(
-        new Model(_win, _msgNotify, L"c:\\Dropbox\\Video\\Search"));
+        // new Model(_win, _msgNotify, L"c:\\Dropbox\\Video\\Search"));
+        new Model(_win, _msgNotify, L"C:\\Users\\hgh\\0hgh\\dev"));
     return true;
 }
 
