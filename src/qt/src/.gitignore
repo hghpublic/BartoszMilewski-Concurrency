@@ -1,0 +1,6 @@
+# Qt
+.qtcreator
+.qmlls.ini
+
+# cmake
+build/
