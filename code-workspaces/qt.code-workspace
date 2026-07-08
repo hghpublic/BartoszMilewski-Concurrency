@@ -1,0 +1,13 @@
+
+{
+	"folders": [
+        {
+            "path": "..",
+            "name": "root"
+        },
+        {
+            "path": "../src/qt/src",
+            "name": "qt"
+        }
+    ]
+}
